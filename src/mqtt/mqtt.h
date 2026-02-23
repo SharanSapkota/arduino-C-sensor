@@ -1,18 +1,20 @@
-#include 
-#include <PubSubClient.h>
+#pragma once
 #include <WiFi.h>
+#include <PubSubClient.h> 
+#include "../sensor/sensor.h"
 
-class Mqtt {
-    private:
-        const char* brokerIP;
-        const char* brokerPort;
-        const char* clientId;
-        PubSubClient client;
-    
-    public:
-        Mqtt(const char* brokerIP, const char* brokerPort, const char* clientId);
-        void connect();
-        void publish(SensorData data);
-        bool isConnected();
-}
+class MQTT {
+private:
+    WiFiClient   wifiClient;
+    PubSubClient mqttClient;
+    const char*  brokerIP;
+    int brokerPort;
+    const char*  clientId;
+
+public:
+    MQTT(const char* brokerIP, int brokerPort, const char* clientId);
+    void connect();
+    void publish(SensorData data);
+    bool isConnected();
+};
 

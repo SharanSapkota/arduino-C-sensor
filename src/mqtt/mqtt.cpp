@@ -1,41 +1,40 @@
 #include "mqtt.h"
 
-Mqtt::Mqtt(const char* brokerIP, const char* brokerPort, const char* clientId)
+MQTT::MQTT(const char* brokerIP, int brokerPort, const char* clientId)
     : mqttClient(wifiClient) {
     this->brokerIP = brokerIP;
     this->brokerPort = brokerPort;
     this->clientId = clientId;
-    this->client.setServer(brokerIP, atoi(brokerPort));
+
+    mqttClient.setServer(brokerIP, brokerPort);
 }
-    void Mqtt::connect() {
-        mqttClient.setServer(this->brokerIP, atoi(this->brokerPort));
+
+    void MQTT::connect() {
         while (!mqttClient.connected()) {
             Serial.print("Connecting to MQTT broker...");
             if (mqttClient.connect(this->clientId)) {
-                Serial.println("connected");
+            Serial.println("connected!");
             } else {
-                Serial.print("failed");
-                Serial.print(mqttClient.state());
-                delay(5000);
-            }
+            Serial.println(mqttClient.state());
+            delay(5000);
         }
-        public:
-            Mqtt(const char* brokerIP, const char* brokerPort, const char* clientId);
     }
+}
 
-    void Mqtt::publish(SensorData data) {
-        String payload = "{"
-        payload += "\"sensorId\":" + String(data.sensorId) + ",";
-        payload += "\"ppm\":" + String(data.hydrogenPpm) + ",";
-        payload += "\"rawADC\":" + String(data.rawADC) + ",";
-        payload += "\"temp\":" + String(data.temperature) + ",";
-        payload += "\"humidity\":" + String(data.humidity) + ",";
-        payload += "\"timestamp\":" + String(data.timestamp);
-        payload += "}";
-    }
+void MQTT::publish(SensorData data) {
+    String payload = "{";
+    payload += "\"sensorId\":" + String(data.sensorId)     + ",";
+    payload += "\"ppm\":" + String(data.hydrogenPpm)  + ",";
+    payload += "\"rawADC\":" + String(data.rawADC)       + ",";
+    payload += "\"temp\":" + String(data.temperature)  + ",";
+    payload += "\"humidity\":" + String(data.humidity)     + ",";
+    payload += "\"timestamp\":" + String(data.timestamp);
+    payload += "}";
 
-    bool Mqtt::isConnected() {
+    mqttClient.publish("hydrogen/sensors", payload.c_str());
+    Serial.println("Published: " + payload);
+}
+
+    bool MQTT::isConnected() {
         return mqttClient.connected();
     }
-
-    
