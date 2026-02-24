@@ -6,6 +6,7 @@
 #define ANALOG_PIN  26     
 #define SENSOR_ID  1 //We need to update the id according to the sensor
 #define USE_MOCK_DATA   true
+#define RAISE_ALARM_VALUE   2500
 
 const char* WIFI_SSID = "your_SSID";
 const char* WIFI_PASSWORD = "your_PASSWORD";
@@ -29,7 +30,9 @@ void loop() {
     SensorData data = USE_MOCK_DATA 
         ? sensor.getMockData() 
         : sensor.getRealData();
-
+    if (data.hydrogenPpm > RAISE_ALARM_VALUE) {
+        // Turn on alarm
+    }
     mqtt.publish(data);
 
     delay(5000);
