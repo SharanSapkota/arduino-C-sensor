@@ -14,7 +14,7 @@ const int   MQTT_PORT     = 1883;
 
 Internet internet(WIFI_SSID, WIFI_PASSWORD);
 Sensor sensor(SENSOR_ID, ANALOG_PIN);
-MQTT mqtt(MQTT_BROKER, MQTT_PORT, "esp32-sensor-1");
+MQTT mqtt(MQTT_BROKER, MQTT_PORT, "picow-sensor-1");
 
 void setup() {
     Serial.begin(115200);
