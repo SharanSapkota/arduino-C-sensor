@@ -4,13 +4,13 @@
 ![MQTT](https://img.shields.io/badge/MQTT-FF6F00?style=for-the-badge&logo=eclipse-mosquitto&logoColor=white)
 ![JSON](https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=json&logoColor=white)
 
-## 🚀 About
+## About
 This C++ project reads data from sensors, converts it into **JSON format**, and publishes it to a processing pipeline using **MQTT**.  
 It’s ideal for **IoT projects**, real-time monitoring, and embedded system applications.
 
 ---
 
-## 🛠️ Features
+## Features
 - Read measurements from connected sensors  
 - Convert sensor data into **structured JSON**  
 - Publish JSON data to an **MQTT broker**  
@@ -19,7 +19,7 @@ It’s ideal for **IoT projects**, real-time monitoring, and embedded system app
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 - **Language:** C++  
 - **Communication Protocol:** MQTT  
 - **Data Format:** JSON  
@@ -27,9 +27,4 @@ It’s ideal for **IoT projects**, real-time monitoring, and embedded system app
 
 ---
 
-## 📦 Installation
 
-1. Clone the repository:
-```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
